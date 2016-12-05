@@ -1,11 +1,11 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/templates'
+require 'fog/arubacloud/compute/models/templates'
 
-describe Fog::Compute::ArubaCloud::Templates do
-  subject { Fog::Compute::ArubaCloud::Templates.new }
+describe Fog::ArubaCloud::Compute::Templates do
+  subject { Fog::ArubaCloud::Compute::Templates.new }
 
   it 'should be a collection of Template' do
-    subject.model.must_equal(Fog::Compute::ArubaCloud::Template)
+    subject.model.must_equal(Fog::ArubaCloud::Compute::Template)
   end
 
   it 'should respond to #all' do

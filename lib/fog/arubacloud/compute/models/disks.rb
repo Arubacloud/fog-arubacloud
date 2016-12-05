@@ -6,7 +6,7 @@
 #
 
 require 'fog/core/collection'
-require 'fog/arubacloud/compute/models/ip'
+require 'fog/arubacloud/compute/models/disk'
 
 module Fog
   module ArubaCloud

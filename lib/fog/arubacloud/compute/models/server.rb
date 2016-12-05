@@ -119,12 +119,12 @@ module Fog
               server = s if s['Name'].to_s.include? data[:name].to_s
             end
           end
-          Fog::Logger.debug("Fog::Compute::ArubaCloud::Server.create, #{data[:name]} server: #{server.inspect}")
+          Fog::Logger.debug("Fog::ArubaCloud::Compute::Server.create, #{data[:name]} server: #{server.inspect}")
           if server
             merge_attributes(server)
           else
             message = 'error during attribute merge, `server` object is not ready.'
-            Fog::Logger.warning("Fog::Compute::ArubaCloud::Server.create, #{message}")
+            Fog::Logger.warning("Fog::ArubaCloud::Compute::Server.create, #{message}")
             sleep(1)
           end
         end

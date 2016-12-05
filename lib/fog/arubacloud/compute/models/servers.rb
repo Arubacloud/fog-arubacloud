@@ -16,8 +16,8 @@ module Fog
         model Fog::ArubaCloud::Compute::Server
 
         # Returns list of servers
-        # @return [Fog::Compute::ArubaCloud::Servers] Retrieves a list servers.
-        # @raise [Fog::Compute::ArubaCloud::NotFound]
+        # @return [Fog::ArubaCloud::Compute::Servers] Retrieves a list servers.
+        # @raise [Fog::ArubaCloud::Compute::NotFound]
         # @note The filter parameter on the method is just to maintain compatibility with other providers that support
         #       filtering.
         def all(filters = [])
@@ -28,11 +28,11 @@ module Fog
 
         # Retrieves server
         # @param [String] server_id for server to be returned.
-        # @return [Fog::Compute::ArubaCloud::Server]
+        # @return [Fog::ArubaCloud::Compute::Server]
         def get(server_id)
           data = service.get_server_details(server_id)
           objects = data['Value']
-          msg = "Fog::Compute::ArubaCloud::Servers.get 'objects' must be an hash, actually is: #{objects.class} #{objects.to_yaml}"
+          msg = "Fog::ArubaCloud::Compute::Servers.get 'objects' must be an hash, actually is: #{objects.class} #{objects.to_yaml}"
           Fog::Logger.debug(msg)
           raise Fog::ArubaCloud::Errors::BadObjectType.new("#{msg}") unless objects.instance_of? Hash
           new(objects)

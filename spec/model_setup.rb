@@ -10,7 +10,7 @@ module ModelSetup
       end
 
       # Initialize the service object to be used inside models tests
-      let(:service) { Fog::Compute::ArubaCloud.new(arguments) }
+      let(:service) { Fog::ArubaCloud::Compute.new(arguments) }
     end
   end
 end

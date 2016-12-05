@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Fog::Compute::ArubaCloud do
+describe Fog::ArubaCloud::Compute do
   describe 'it create the provider object' do
 
     before do
@@ -9,7 +9,7 @@ describe Fog::Compute::ArubaCloud do
           :arubacloud_password => '',
           :url 								 => ''
       }
-      @service = Fog::Compute::ArubaCloud.new(@arguments)
+      @service = Fog::ArubaCloud::Compute.new(@arguments)
     end
 
     it 'respond to #request' do
@@ -25,23 +25,23 @@ describe Fog::Compute::ArubaCloud do
     end
 
     it 'respond to #servers' do
-      assert @service.respond_to? :servers
+      assert @service.respond_to?(:servers)
     end
 
     it 'respond to #templates' do
-      assert @service.respond_to? :templates
+      assert @service.respond_to?(:templates)
     end
 
     it 'respond to #loadbalancers' do
-      assert @service.respond_to? :loadbalancers
+      assert @service.respond_to?(:loadbalancers)
     end
 
     it 'respond to #schedules' do
-      assert @service.respond_to? :schedules
+      assert @service.respond_to?(:schedules)
     end
 
     it 'respond to #disks' do
-      assert @service.respond_to? :disks
+      assert @service.respond_to?(:disks)
     end
 
   end

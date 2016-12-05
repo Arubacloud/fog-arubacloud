@@ -1,12 +1,12 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/servers'
+require 'fog/arubacloud/compute/models/servers'
 
-describe Fog::Compute::ArubaCloud::Servers do
-  # lazy loader (same as let(:subject) { Fog::Compute::ArubaCloud::Servers })
-  subject { Fog::Compute::ArubaCloud::Servers }
+describe Fog::ArubaCloud::Compute::Servers do
+  # lazy loader (same as let(:subject) { Fog::ArubaCloud::Compute::Servers })
+  subject { Fog::ArubaCloud::Compute::Servers }
 
   it 'should be a collection of Servers' do
-    subject.model.must_equal(Fog::Compute::ArubaCloud::Server)
+    subject.model.must_equal(Fog::ArubaCloud::Compute::Server)
   end
 
   it 'respond to #disks' do

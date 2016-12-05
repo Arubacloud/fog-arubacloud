@@ -1,20 +1,20 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/loadbalancer'
+require 'fog/arubacloud/compute/models/loadbalancer'
 
-describe Fog::Compute::ArubaCloud::LoadBalancer do
+describe Fog::ArubaCloud::Compute::LoadBalancer do
   include ModelSetup
 
   let (:loadbalancer_class) do
-    class Fog::Compute::ArubaCloud::LoadBalancer
+    class Fog::ArubaCloud::Compute::LoadBalancer
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::LoadBalancer
+    Fog::ArubaCloud::Compute::LoadBalancer
   end
 
   #let(:service) { Object.new }
-  let(:loadbalancer) { Fog::Compute::ArubaCloud::LoadBalancer.new }
+  let(:loadbalancer) { Fog::ArubaCloud::Compute::LoadBalancer.new }
 
   it 'must respond to #create_loadbalancer' do
     loadbalancer.must_respond_to :create_loadbalancer

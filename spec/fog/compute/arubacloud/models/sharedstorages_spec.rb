@@ -1,10 +1,10 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/sharedstorages'
+require 'fog/arubacloud/compute/models/sharedstorages'
 
-describe Fog::Compute::ArubaCloud::SharedStorages do
-  subject { Fog::Compute::ArubaCloud::SharedStorages }
+describe Fog::ArubaCloud::Compute::SharedStorages do
+  subject { Fog::ArubaCloud::Compute::SharedStorages }
 
   it 'should be a collection of SharedStorage' do
-    subject.model.must_equal(Fog::Compute::ArubaCloud::SharedStorage)
+    subject.model.must_equal(Fog::ArubaCloud::Compute::SharedStorage)
   end
 end

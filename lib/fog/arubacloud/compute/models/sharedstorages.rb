@@ -6,7 +6,7 @@
 #
 
 require 'fog/core/collection'
-require 'fog/arubacloud/compute/models/sharedstorages'
+require 'fog/arubacloud/compute/models/sharedstorage'
 
 module Fog
   module ArubaCloud

@@ -1,11 +1,11 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/ips'
+require 'fog/arubacloud/compute/models/ips'
 
-describe Fog::Compute::ArubaCloud::Ips do
-  subject { Fog::Compute::ArubaCloud::Ips }
+describe Fog::ArubaCloud::Compute::Ips do
+  subject { Fog::ArubaCloud::Compute::Ips }
 
   it 'should be a collection of IP' do
-    subject.model.must_equal(Fog::Compute::ArubaCloud::IP)
+    subject.model.must_equal(Fog::ArubaCloud::Compute::IP)
   end
 
 end

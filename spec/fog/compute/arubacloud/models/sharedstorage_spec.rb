@@ -1,20 +1,20 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/sharedstorage'
+require 'fog/arubacloud/compute/models/sharedstorage'
 
-describe Fog::Compute::ArubaCloud::SharedStorage do
+describe Fog::ArubaCloud::Compute::SharedStorage do
   include ModelSetup
 
   let (:sharedstorage_class) do
-    class Fog::Compute::ArubaCloud::SharedStorage
+    class Fog::ArubaCloud::Compute::SharedStorage
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::SharedStorage
+    Fog::ArubaCloud::Compute::SharedStorage
   end
 
   #let(:service) { Object.new }
-  let(:sharedstorage) { Fog::Compute::ArubaCloud::SharedStorage.new }
+  let(:sharedstorage) { Fog::ArubaCloud::Compute::SharedStorage.new }
 
   before :each do
     Fog.unmock!

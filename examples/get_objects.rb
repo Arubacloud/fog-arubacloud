@@ -11,7 +11,7 @@ require 'optparse'
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = 'Usage: get_servers.rb [options]'
+  opts.banner = 'Usage: get_objects.rb [options]'
   opts.on('-uUSERNAME', '--username=USERNAME', 'ArubaCloud Username') { |n| options[:username] = n}
   opts.on('-pPASSWORD', '--password=PASSWORD', 'ArubaCloud Password') { |p| options[:password] = p}
 end.parse!

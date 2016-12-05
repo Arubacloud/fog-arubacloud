@@ -16,7 +16,7 @@ module Fog
         model Fog::ArubaCloud::Compute::IP
 
         # Returns list of Ip Addresses
-        # @return [Fog::Compute::ArubaCloud::Ips]
+        # @return [Fog::ArubaCloud::Compute::Ips]
         # @raise [Fog::ArubaCloud::Errors::NotFound]
         def all
           data = service.get_purchased_ip_addresses
@@ -26,7 +26,7 @@ module Fog
 
         # Returns a single IpAddress object
         # @param ip [String]
-        # @return [Fog::Compute::ArubaCloud::IP]
+        # @return [Fog::ArubaCloud::Compute::IP]
         # @raise [Fog::ArubaCloud::Errors::NotFound]
         def get(ip)
           # TODO: Implement single item retrieve

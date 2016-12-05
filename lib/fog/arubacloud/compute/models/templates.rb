@@ -16,8 +16,8 @@ module Fog
         model Fog::ArubaCloud::Compute::Template
 
         # Returns list of Template
-        # @return [Fog::Compute::ArubaCloud::Template] Retrieves the complete Templates list.
-        # @raise [Fog::Compute::ArubaCloud::NotFound]
+        # @return [Fog::ArubaCloud::Compute::Template] Retrieves the complete Templates list.
+        # @raise [Fog::ArubaCloud::Compute::NotFound]
         def all
           data = service.get_hypervisors
           objects = data['Value']
@@ -34,8 +34,8 @@ module Fog
 
         # Return only templates assigned to a specific service, default is smart (4)
         # @param hv [Int] The ID of the hypervisor
-        # @return [Fog::Compute::ArubaCloud::Template] List of templates
-        # @raise [Fog::Compute::ArubaCloud::NotFound]
+        # @return [Fog::ArubaCloud::Compute::Template] List of templates
+        # @raise [Fog::ArubaCloud::Compute::NotFound]
         def get_hypervisor(hv=4)
           manipulated_objects = Array.new
           data = service.get_hypervisors
@@ -46,7 +46,7 @@ module Fog
               # select{|f| f['HypervisorType'].eql?(hv)}
               t.merge!({'hypervisor' => hv_type})
               if t['hypervisor'].eql?(4)
-                Fog::Logger.debug("Fog::Compute::ArubaCloud::Templates.get_hypervisors: t: #{h.to_yaml}")
+                Fog::Logger.debug("Fog::ArubaCloud::Compute::Templates.get_hypervisors: t: #{h.to_yaml}")
                 manipulated_objects << t
               end
             end
@@ -56,7 +56,7 @@ module Fog
 
         # Retrieves Single Template Item
         # @param [String] template_id for server to be returned.
-        # @return [Fog::Compute::ArubaCloud::Template]
+        # @return [Fog::ArubaCloud::Compute::Template]
         def get(template_id)
           # TODO: Implement retrieve of a single template
         end

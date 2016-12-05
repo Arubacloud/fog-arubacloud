@@ -1,11 +1,11 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/network_adapters'
+require 'fog/arubacloud/compute/models/network_adapters'
 
-describe Fog::Compute::ArubaCloud::NetworkAdapters do
-  # lazy loader (same as let(:subject) { Fog::Compute::ArubaCloud::NetworkAdapters })
-  subject { Fog::Compute::ArubaCloud::NetworkAdapters }
+describe Fog::ArubaCloud::Compute::NetworkAdapters do
+  # lazy loader (same as let(:subject) { Fog::ArubaCloud::Compute::NetworkAdapters })
+  subject { Fog::ArubaCloud::Compute::NetworkAdapters }
 
   it 'should be a collection of NetworkAdapter' do
-    subject.model.must_equal(Fog::Compute::ArubaCloud::NetworkAdapter)
+    subject.model.must_equal(Fog::ArubaCloud::Compute::NetworkAdapter)
   end
 end

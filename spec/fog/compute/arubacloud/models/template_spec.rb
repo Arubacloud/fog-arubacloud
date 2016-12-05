@@ -1,20 +1,20 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/template'
+require 'fog/arubacloud/compute/models/template'
 
-describe Fog::Compute::ArubaCloud::Template do
+describe Fog::ArubaCloud::Compute::Template do
   include ModelSetup
 
   let (:template_class) do
-    class Fog::Compute::ArubaCloud::Template
+    class Fog::ArubaCloud::Compute::Template
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::Template
+    Fog::ArubaCloud::Compute::Template
   end
 
   #let(:service) { Object.new }
-  let(:template) { Fog::Compute::ArubaCloud::Template.new }
+  let(:template) { Fog::ArubaCloud::Compute::Template.new }
 
   before :each do
     Fog.unmock!

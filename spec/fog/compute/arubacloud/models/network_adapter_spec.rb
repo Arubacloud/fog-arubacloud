@@ -1,16 +1,16 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/network_adapter'
+require 'fog/arubacloud/compute/models/network_adapter'
 
-describe Fog::Compute::ArubaCloud::NetworkAdapter do
+describe Fog::ArubaCloud::Compute::NetworkAdapter do
   include ModelSetup
 
   let (:network_adapter_class) do
-    class Fog::Compute::ArubaCloud::NetworkAdapter
+    class Fog::ArubaCloud::Compute::NetworkAdapter
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::NetworkAdapter
+    Fog::ArubaCloud::Compute::NetworkAdapter
   end
 
   it 'should have an unique id' do

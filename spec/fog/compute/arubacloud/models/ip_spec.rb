@@ -1,20 +1,20 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/ip'
+require 'fog/arubacloud/compute/models/ip'
 
-describe Fog::Compute::ArubaCloud::IP do
+describe Fog::ArubaCloud::Compute::IP do
   include ModelSetup
 
   let (:ip_class) do
-    class Fog::Compute::ArubaCloud::IP
+    class Fog::ArubaCloud::Compute::IP
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::IP
+    Fog::ArubaCloud::Compute::IP
   end
 
   let(:service) { Object.new }
-  let(:ip) { Fog::Compute::ArubaCloud::IP.new }
+  let(:ip) { Fog::ArubaCloud::Compute::IP.new }
 
   it 'must respond to #purchase' do
     ip.must_respond_to :purchase

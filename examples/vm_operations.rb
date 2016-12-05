@@ -29,7 +29,7 @@ servers = service.servers
 # Poweroff and delete every VM in a Datacenter
 servers.each do |s|
   puts("Powering Off and Deleting VM: #{s.name}...")
-  next if s.state == Fog::Compute::ArubaCloud::Server::CREATING
+  next if s.state == Fog::ArubaCloud::Compute::Server::CREATING
   s.power_off unless s.stopped?
   until s.stopped?
     s.get_server_details

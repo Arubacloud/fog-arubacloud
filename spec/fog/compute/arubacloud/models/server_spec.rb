@@ -1,20 +1,20 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/server'
+require 'fog/arubacloud/compute/models/server'
 
-describe Fog::Compute::ArubaCloud::Server do
+describe Fog::ArubaCloud::Compute::Server do
   include ModelSetup
   # :service is already took from ModelSetup, no need to redefine it
 
   let (:server_class) do
-    class Fog::Compute::ArubaCloud::Server
+    class Fog::ArubaCloud::Compute::Server
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::Server
+    Fog::ArubaCloud::Compute::Server
   end
 
-  let(:server) { Fog::Compute::ArubaCloud::Server.new }
+  let(:server) { Fog::ArubaCloud::Compute::Server.new }
   let(:collection) { Object.new }
   let(:service) { Object.new }
 

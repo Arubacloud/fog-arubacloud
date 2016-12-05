@@ -1,20 +1,20 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/disk'
+require 'fog/arubacloud/compute/models/disk'
 
-describe Fog::Compute::ArubaCloud::Disk do
+describe Fog::ArubaCloud::Compute::Disk do
   include ModelSetup
 
   let (:disk_class) do
-    class Fog::Compute::ArubaCloud::Disk
+    class Fog::ArubaCloud::Compute::Disk
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::Disk
+    Fog::ArubaCloud::Compute::Disk
   end
 
   let(:service) { Object.new }
-  let(:disk) { Fog::Compute::ArubaCloud::Disk.new }
+  let(:disk) { Fog::ArubaCloud::Compute::Disk.new }
 
   it 'must respond to #create' do
     disk.must_respond_to :create

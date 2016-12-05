@@ -1,20 +1,20 @@
 require File.expand_path('spec/spec_helper')
-require 'fog/arubacloud/models/compute/schedule'
+require 'fog/arubacloud/compute/models/schedule'
 
-describe Fog::Compute::ArubaCloud::Schedule do
+describe Fog::ArubaCloud::Compute::Schedule do
   include ModelSetup
 
   let (:schedule_class) do
-    class Fog::Compute::ArubaCloud::Schedule
+    class Fog::ArubaCloud::Compute::Schedule
       def self.read_identity
         instance_variable_get('@identity')
       end
     end
-    Fog::Compute::ArubaCloud::Schedule
+    Fog::ArubaCloud::Compute::Schedule
   end
 
   #let(:service) { Object.new }
-  let(:schedule) { Fog::Compute::ArubaCloud::Schedule.new }
+  let(:schedule) { Fog::ArubaCloud::Compute::Schedule.new }
 
   before :each do
     Fog.unmock!
