@@ -1,3 +1,5 @@
+require 'fog/arubacloud/compute'
+
 module ModelSetup
   def self.included(base)
     base.class_eval do

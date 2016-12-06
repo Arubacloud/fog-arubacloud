@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'fog/arubacloud/compute'
 
 describe Fog::ArubaCloud::Compute do
   describe 'it create the provider object' do

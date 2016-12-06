@@ -11,16 +11,13 @@ require 'fog/json'
 
 module Fog
   module ArubaCloud
-    #autoload :ArubaCloud, File.expand_path('../arubacloud/compute', __FILE__)
     extend Fog::Provider
-
+    
+    autoload :ArubaCloud, File.expand_path('../arubacloud/compute', __FILE__)
     DEFAULT_API_VERSION = '2.9'
     DEFAULT_WS_ENDUSER_URL = "https://api.dc2.computing.cloud.it/WsEndUser/v#{DEFAULT_API_VERSION}/WsEndUser.svc/json"
 
     service(:compute, 'Compute')
     
-    class Compute
-      autoload :ArubaCloud, File.expand_path('../arubacloud/compute', __FILE__)
-    end
   end
 end
