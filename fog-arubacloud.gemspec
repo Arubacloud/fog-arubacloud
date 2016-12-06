@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Module for the 'fog' gem to support ArubaCloud}
   spec.description   = %q{This library can be used as a module for 'fog' or a standalone provider to use
                        the ArubaCloud IaaS in applications}
-  spec.homepage      = 'https://www.github.com/blackms/fog-arubacloud'
+  spec.homepage      = 'https://www.github.com/ArubaCloud/fog-arubacloud'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
