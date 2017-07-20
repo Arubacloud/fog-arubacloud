@@ -34,16 +34,14 @@ module Fog
                   }
               }
           )
-
           options = {
               :http_method => :post,
               :method => 'SetEnqueueServerCreation',
-              :body => Fog::JSON.encode(body),
+              :body => Fog::JSON.encode(body)
           }
-
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request( body, 'SetEnqueueServerCreation', "Smart_vm creation error"  )
           }
           Fog::Logger.debug("SetEnqueueServerCreation time: #{time}")
           if response['Success']

@@ -117,11 +117,10 @@ module Fog
         # @param [String] failure_message
         # @param [Bool] benchmark
         def request(body={}, method_name='', failure_message='', benchmark=true)
-          full_body = self.body(method_name).merge(body)
           options = {
               :http_method => :post,
               :method => method_name,
-              :body => Fog::JSON.encode(full_body)
+              :body => Fog::JSON.encode(body)
           }
           response = nil
           if benchmark
@@ -136,7 +135,11 @@ module Fog
             response
           else
             Fog::Logger.debug("Request failed. Debug: #{response}")
-            raise Fog::ArubaCloud::Errors::RequestError.new(failure_message)
+						if !response['ResultMessage'] || response['ResultMessage'].empty?
+							raise Fog::ArubaCloud::Errors::RequestError.new(failure_message)
+						else
+							raise Fog::ArubaCloud::Errors::RequestError.new(response['ResultMessage'], response  )
+						end
           end
         end
       end
