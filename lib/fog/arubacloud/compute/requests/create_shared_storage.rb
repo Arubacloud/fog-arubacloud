@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -49,6 +50,6 @@ module Fog
         end # create_shared_storage
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

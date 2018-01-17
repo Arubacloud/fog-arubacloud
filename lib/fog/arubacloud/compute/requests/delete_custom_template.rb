@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -37,6 +38,6 @@ module Fog
         end # delete_custom_template
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

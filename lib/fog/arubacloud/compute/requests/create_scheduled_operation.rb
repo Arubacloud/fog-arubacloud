@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -49,6 +50,7 @@ module Fog
           response.body
         end # create_scheduled_operation
       end # Mock
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

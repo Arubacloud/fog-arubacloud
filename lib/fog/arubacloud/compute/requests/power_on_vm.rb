@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -13,14 +14,9 @@ module Fog
       class Real
         def power_on_vm(id)
           body = self.body('SetEnqueueServerStart').merge({:ServerId => "#{id}"})
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerStart',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body , 'SetEnqueueServerStart', 'SetEnqueueServerStart Error')
           }
           Fog::Logger.debug("SetEnqueueServerStart time: #{time}")
           if response['Success']
@@ -44,6 +40,7 @@ module Fog
           response.body
         end # power_on_vm
       end # Mock
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -12,11 +13,21 @@ require 'benchmark'
 module Fog
   module ArubaCloud
     class Compute
-
       class Real
         def get_servers
-          body = {}
-          self.request(body, 'GetServers', 'Error retrieving server list.')
+          body = self.body('GetServers')
+          response = nil
+          time = Benchmark.realtime {
+            response = request( body,  'GetServers', "GetServer Error"  )
+          }
+          Fog::Logger.debug("GetServers time: #{time}")
+          if response['Success']
+            response
+          else
+            raise Fog::ArubaCloud::Errors::RequestError.new(
+                "Error during GetServers request. Error message: \n#{response}"
+            )
+          end
         end # get_servers
       end # Real
 
@@ -67,6 +78,6 @@ module Fog
         end # get_servers
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -16,14 +17,9 @@ module Fog
       class Real
         def get_custom_templates
           body = self.body('GetAvailablePersonalTemplates')
-          options = {
-              :http_method => :post,
-              :method => 'GetAvailablePersonalTemplates',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'GetAvailablePersonalTemplates', 'GetAvailablePersonalTemplates Error')
           }
           Fog::Logger.debug("GetAvailablePersonalTemplates time: #{time}")
           if response['Success']
@@ -31,8 +27,8 @@ module Fog
           else
             raise Fog::ArubaCloud::Errors::RequestError.new('Error in request.')
           end
-
         end # get_custom_templates
+
         class Mock
           def get_custom_templates
             raise Fog::Errors::MockNotImplemented.new(
@@ -41,6 +37,7 @@ module Fog
           end # get_custom_templates
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

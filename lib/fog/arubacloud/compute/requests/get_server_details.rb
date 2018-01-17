@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -18,22 +19,15 @@ module Fog
         # @return [Excon::Response]
         def get_server_details(server_id)
           body = self.body('GetServerDetails').merge({:ServerId => server_id})
-          options = {
-              :http_method => :post,
-              :method => 'GetServerDetails',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'GetServerDetails', 'GetServerDetails, error')
           }
           Fog::Logger.debug("GetServerDetails time: #{time}")
           if response['Success']
             response
           else
-            raise Fog::ArubaCloud::Errors::RequestError.new(
-                "Error during GetServerDetails request. Error message: \n#{response}"
-            )
+            raise Fog::ArubaCloud::Errors::RequestError.new( "Error during GetServerDetails request. Error message: \n#{response}" )
           end
         end # get_server_details
       end # Real
@@ -46,6 +40,6 @@ module Fog
         end # get_server_details
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

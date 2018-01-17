@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -90,6 +91,7 @@ module Fog
       request :edit_shared_storage
       request :delete_shared_storage
       request :rename_shared_storage
+      request :get_package_id
 
       class BaseObject < Fog::ArubaCloud::Service
         def initialize(options={})
@@ -123,6 +125,7 @@ module Fog
               :body => Fog::JSON.encode(body)
           }
           response = nil
+
           if benchmark
             time = Benchmark.realtime {
               response = _request(options)
@@ -135,11 +138,11 @@ module Fog
             response
           else
             Fog::Logger.debug("Request failed. Debug: #{response}")
-						if !response['ResultMessage'] || response['ResultMessage'].empty?
-							raise Fog::ArubaCloud::Errors::RequestError.new(failure_message)
-						else
-							raise Fog::ArubaCloud::Errors::RequestError.new(response['ResultMessage'], response  )
-						end
+	    if !response['ResultMessage'] || response['ResultMessage'].empty?
+		raise Fog::ArubaCloud::Errors::RequestError.new(failure_message)
+	    else
+		raise Fog::ArubaCloud::Errors::RequestError.new(response['ResultMessage'], response  )
+	    end
           end
         end
       end

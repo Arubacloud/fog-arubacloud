@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -15,14 +16,9 @@ module Fog
       class Real
         def get_hypervisors
           body = self.body('GetHypervisors')
-          options = {
-              :http_method => :post,
-              :method => 'GetHypervisors',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request( body, 'GetHypervisors', "GetHypervisors Error"  )
           }
           Fog::Logger.debug("GetHypervisors time: #{time}")
           if response['Success']
@@ -38,13 +34,13 @@ module Fog
         # the mock method of the request. I will introduce it in the next version after structuring the mock
         # objects in a more reasonable way.
         #
-      def get_hypervisors
+        def get_hypervisors
           raise Fog::Errors::MockNotImplemented.new(
               'Mock object for get_hypervisor not present, read code comments for details.'
           )
         end # get_hypervisors
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

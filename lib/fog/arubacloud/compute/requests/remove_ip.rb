@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -15,14 +16,9 @@ module Fog
           body = self.body('SetRemoveIpAddress').merge(
               {:IpAddressResourceId => id}
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetRemoveIpAddress',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetRemoveIpAddress', 'SetRemoveIpAddress Error')
           }
           Fog::Logger.debug("SetRemoveIpAddress time: #{time}")
           if response['Success']
@@ -48,6 +44,6 @@ module Fog
         end # remove_ip
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -15,14 +16,9 @@ module Fog
       class Real
         def get_scheduled_operations(datestart, dateend)
           body = self.body('GetScheduledOperations').merge({:dateStart => datestart, :dateEnd => dateend})
-          options = {
-              :http_method => :post,
-              :method => 'GetScheduledOperations',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'GetScheduledOperations', 'GetScheduledOperations Error')
           }
           Fog::Logger.debug("GetScheduledOperations time: #{time}")
           if response['Success']
@@ -38,8 +34,9 @@ module Fog
                       'Mock not implemented. Feel free to contribute.'
                   )
           end # get_scheduled_operations
-        end # Mock
+       end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

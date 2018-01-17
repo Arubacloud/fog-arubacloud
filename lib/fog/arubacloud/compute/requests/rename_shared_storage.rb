@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -23,14 +24,9 @@ module Fog
                   }
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetRenameSharedStorage',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetRenameSharedStorage', 'SetRenameSharedStorage Error')
           }
           Fog::Logger.debug("SetRenameSharedStorage time: #{time}")
           if response['Success']
@@ -38,8 +34,8 @@ module Fog
           else
             raise Fog::ArubaCloud::Errors::RequestError.new('Error in request.')
           end
-
         end # rename_shared_storage
+
         class Mock
           def rename_shared_storage
             raise Fog::Errors::MockNotImplemented.new(
@@ -48,6 +44,7 @@ module Fog
           end # rename_shared_storage
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

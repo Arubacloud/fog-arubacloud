@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -15,14 +16,9 @@ module Fog
       class Real
         def power_off_vm(id)
           body = self.body('SetEnqueueServerStop').merge({:ServerId => "#{id}"})
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerStop',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body , 'SetEnqueueServerStop', 'SetEnqueueServerStop Error')
           }
           Fog::Logger.debug("SetEnqueueServerStop time: #{time}")
           if response['Success']
@@ -46,6 +42,7 @@ module Fog
           response.body
         end
       end # Mock
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

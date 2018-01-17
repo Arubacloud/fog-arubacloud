@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -17,14 +18,9 @@ module Fog
       class Real
         def get_purchased_ip_addresses
           body = self.body('GetPurchasedIpAddresses')
-          get_servers_options = {
-              :http_method => :post,
-              :method => 'GetPurchasedIpAddresses',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(get_servers_options)
+            response = request(body, 'GetPurchasedIpAddresses', 'GetPurchasedIpAddresses Error')
           }
           Fog::Logger.debug("GetPurchasedIpAddresses time: #{time}")
           if response['Success']
@@ -74,6 +70,6 @@ module Fog
         end # get_purchased_ip_addresses
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

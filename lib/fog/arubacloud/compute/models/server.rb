@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -99,7 +100,6 @@ module Fog
         def create
           requires :name, :cpu, :memory, :admin_passwd, :vm_type
           data = attributes
-
           if vm_type.eql? 'pro'
             # Automatically purchase a public ip address
             data[:ipv4_id] = service.purchase_ip['Value']['ResourceId']
@@ -127,6 +127,7 @@ module Fog
             Fog::Logger.warning("Fog::ArubaCloud::Compute::Server.create, #{message}")
             sleep(1)
           end
+
         end
 
         def get_server_details

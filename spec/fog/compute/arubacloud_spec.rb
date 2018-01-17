@@ -8,7 +8,7 @@ describe Fog::ArubaCloud::Compute do
       @arguments = {
           :arubacloud_username => '',
           :arubacloud_password => '',
-          :url 								 => ''
+          :url => ''
       }
       @service = Fog::ArubaCloud::Compute.new(@arguments)
     end

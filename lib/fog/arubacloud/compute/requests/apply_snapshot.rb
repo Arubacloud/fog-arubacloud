@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -32,6 +33,7 @@ module Fog
           )
         end #Apply
       end #Real
+
       class Mock
         def apply_snapshot
           response = Excon::Response.new
@@ -43,8 +45,9 @@ module Fog
               'Success' => true
           }
           response.body
-        end
-      end
-    end # ArubaCloud
-  end # Compute
+        end # apply snapshot
+      end # Real
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

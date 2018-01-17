@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -45,8 +46,9 @@ module Fog
               'Success' => true
           }
           response.body
-        end
-      end
-    end #ArubaCloud
-  end #Compute
+        end # create snapshot
+      end # Mock
+
+    end # Compute
+  end # ArubaCloud
 end #Fog

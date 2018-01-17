@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -16,17 +17,10 @@ module Fog
         # @param id [String] the id of the virtual machine to reinitialize
         # @return response [Excon::Response]
         def reinitialize_vm(id)
-          body = self.body('SetEnqueueReinitializeServer').merge({
-                                                                     :ServerId => id
-                                                                 })
-          options = {
-              :http_method => :post,
-              :method => 'GetServers',
-              :body => Fog::JSON.encode(body)
-          }
+          body = self.body('SetEnqueueReinitializeServer').merge({ :ServerId => id })
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetEnqueueReinitializeServer', 'SetEnqueueReinitializeServer Error')
           }
           Fog::Logger.debug("SetEnqueueReinitializeServer time: #{time}")
           if response['Success']
@@ -51,6 +45,6 @@ module Fog
         end # reinitialize_vm
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

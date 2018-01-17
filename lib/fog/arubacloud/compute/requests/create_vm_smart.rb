@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -22,23 +23,21 @@ module Fog
         # * 4 => extra-large
         # @param [String] note Metadata for VM
         # @return [Excon::Response]
+
         def create_vm_smart(data)
+          idPackage = self.get_package_id( data[:package_id] )
           body = self.body('SetEnqueueServerCreation').merge(
               {
                   :Server => {
                       :AdministratorPassword => data[:admin_passwd],
                       :Name => data[:name],
-                      :SmartVMWarePackageID => data[:size] || 1,
+                      :SmartVMWarePackageID => idPackage || 1  ,
                       :Note => data[:note] || 'Created by Fog Cloud.',
                       :OSTemplateId => data[:template_id]
                   }
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerCreation',
-              :body => Fog::JSON.encode(body)
-          }
+
           response = nil
           time = Benchmark.realtime {
             response = request( body, 'SetEnqueueServerCreation', "Smart_vm creation error"  )
@@ -47,8 +46,7 @@ module Fog
           if response['Success']
             response
           else
-            raise Fog::ArubaCloud::Errors::RequestError.new("Error during the VM creation. Object: \n#{body}",
-                                                            response=response)
+            raise Fog::ArubaCloud::Errors::RequestError.new("Error during the VM creation. Object: \n#{body}", response=response)
           end
         end
       end
@@ -67,6 +65,6 @@ module Fog
         end # create_vm_smart
       end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

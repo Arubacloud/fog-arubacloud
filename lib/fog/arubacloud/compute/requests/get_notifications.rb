@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -23,15 +24,9 @@ module Fog
                   :LoadBalancerRuleID => data[:ruleid]
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'GetLoadBalancerNotifications',
-              :body => Fog::JSON.encode(body)
-          }
-
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body , 'GetLoadBalancerNotifications', 'GetLoadBalancerNotifications Error')
           }
           Fog::Logger.debug("GetLoadBalancerNotifications time: #{time}")
           if response['Success']
@@ -40,6 +35,7 @@ module Fog
             raise Fog::ArubaCloud::Errors::RequestError.new('Error during the request.')
           end
         end # get_notifications
+
         class Mock
           def get_notifications
             raise Fog::Errors::MockNotImplemented.new(
@@ -48,6 +44,7 @@ module Fog
           end # get_notifications
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

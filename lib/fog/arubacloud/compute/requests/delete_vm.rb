@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -12,14 +13,9 @@ module Fog
       class Real
         def delete_vm(id)
           body = self.body('SetEnqueueServerDeletion').merge({:ServerId => "#{id}"})
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerDeletion',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetEnqueueServerDeletion', 'SetEnqueueServerDeletion Error')
           }
           Fog::Logger.debug("SetEnqueueServerDeletion time: #{time}")
           if response['Success']
@@ -46,9 +42,9 @@ module Fog
               'Success' => true
           }
           response.body
-        end # delete_vm
-      end # Mock
+        end # Mock
+      end # Real
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

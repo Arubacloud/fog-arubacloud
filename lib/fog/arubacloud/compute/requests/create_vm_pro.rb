@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -49,15 +50,9 @@ module Fog
               data[:disks].each { |d| body[:Server][:VirtualDisks] << d}
             end
 
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerCreation',
-              :body => Fog::JSON.encode(body)
-          }
-
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetEnqueueServerCreation', 'SetEnqueueServerCreation Error')
           }
           Fog::Logger.debug("SetEnqueueServerCreation time: #{time}")
           if response['Success']
@@ -80,9 +75,9 @@ module Fog
               'Success' => true
           }
           response.body
-        end
-      end
+        end # create_vm_pro
+      end # Mock
 
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

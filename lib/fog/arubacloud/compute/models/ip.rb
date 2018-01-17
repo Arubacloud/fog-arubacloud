@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -40,6 +41,6 @@ module Fog
         end
 
       end #IP
-    end #ArubaCloud
-  end #Compute
+    end # Compute
+  end # ArubaCloud
 end #Fog

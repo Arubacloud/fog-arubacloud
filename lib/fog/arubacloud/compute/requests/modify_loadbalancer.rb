@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -22,15 +23,9 @@ module Fog
                   :healthCheckNotification => data[:healthchecknotification]
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetModifyLoadBalancer',
-              :body => Fog::JSON.encode(body)
-          }
-
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body , 'SetModifyLoadBalancer', 'SetModifyLoadBalancer Error')
           }
           Fog::Logger.debug("SetModifyLoadBalancer time: #{time}")
           if response['Success']
@@ -39,6 +34,7 @@ module Fog
             raise Fog::ArubaCloud::Errors::RequestError.new('Error during the request.')
           end
         end # modify_loadbalancer
+
         class Mock
           def modify_loadbalancer
             raise Fog::Errors::MockNotImplemented.new(
@@ -47,6 +43,7 @@ module Fog
           end # modify_loadbalancer
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

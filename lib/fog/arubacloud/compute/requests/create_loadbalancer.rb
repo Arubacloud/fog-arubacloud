@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -8,7 +9,6 @@
 require 'fog/arubacloud/service'
 require 'fog/arubacloud/error'
 require 'benchmark'
-
 
 module Fog
   module ArubaCloud
@@ -44,15 +44,9 @@ module Fog
                     ]
                 }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueLoadBalancerCreation',
-              :body => Fog::JSON.encode(body)
-          }
-
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetEnqueueLoadBalancerCreation', 'SetEnqueueLoadBalancerCreation Error')
           }
           Fog::Logger.debug("SetEnqueueLoadBalancerCreation time: #{time}")
           if response['Success']
@@ -60,8 +54,8 @@ module Fog
           else
             raise Fog::ArubaCloud::Errors::RequestError.new('Error during the Load Balancer creation.')
           end
-
         end # create_loadbalancer
+
         class Mock
           def create_loadbalancer(data)
             response = Excon::Response.new
@@ -76,6 +70,7 @@ module Fog
           end # create_loadbalancer
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

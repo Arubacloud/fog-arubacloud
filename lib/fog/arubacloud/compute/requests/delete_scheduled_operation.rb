@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -16,14 +17,9 @@ module Fog
       class Real
         def delete_scheduled_operation(operationid)
           body = self.body('SetRemoveServerScheduledOperation').merge({:operationid => operationid})
-          options = {
-              :http_method => :post,
-              :method => 'SetRemoveServerScheduledOperation',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetRemoveServerScheduledOperation', 'SetRemoveServerScheduledOperation Error')
           }
           Fog::Logger.debug("SetRemoveServerScheduledOperation time: #{time}")
           if response['Success']
@@ -41,6 +37,7 @@ module Fog
           end # get_scheduled_operations
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

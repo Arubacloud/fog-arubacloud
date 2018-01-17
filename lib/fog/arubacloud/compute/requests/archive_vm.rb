@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -25,14 +26,9 @@ module Fog
                   }
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerArchiviation',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetEnqueueServerArchiviation', 'SetEnqueueServerArchiviation Error')
           }
           Fog::Logger.debug("SetEnqueueServerArchiviation time: #{time}")
           if response['Success']
@@ -43,6 +39,7 @@ module Fog
 
         end # archive_vm
       end # Real
+
       class Mock
         def archive_vm
           response = Excon::Response.new
@@ -56,6 +53,7 @@ module Fog
           response.body
         end # archive_vm
       end # Mock
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

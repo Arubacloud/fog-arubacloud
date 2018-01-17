@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -20,15 +21,9 @@ module Fog
                   :loadBalancerID => data[:id]
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueLoadBalancerDeletion',
-              :body => Fog::JSON.encode(body)
-          }
-
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetEnqueueLoadBalancerDeletion', 'SetEnqueueLoadBalancerDeletion Error')
           }
           Fog::Logger.debug("SetEnqueueLoadBalancerDeletion time: #{time}")
           if response['Success']
@@ -37,6 +32,7 @@ module Fog
             raise Fog::ArubaCloud::Errors::RequestError.new('Error during the Load Balancer deletion.')
           end
         end # remove_loadbalancer
+
         class Mock
           def remove_loadbalancer
             raise Fog::Errors::MockNotImplemented.new(
@@ -45,6 +41,7 @@ module Fog
           end # remove_loadbalancer
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

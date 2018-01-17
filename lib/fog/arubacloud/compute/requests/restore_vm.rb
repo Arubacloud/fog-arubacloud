@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -27,14 +28,9 @@ module Fog
                   }
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerRestore',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetEnqueueServerRestore', 'SetEnqueueServerRestore Error')
           }
           Fog::Logger.debug("SetEnqueueServerRestore time: #{time}")
           if response['Success']
@@ -45,6 +41,7 @@ module Fog
 
         end # restore_vm
       end # Real
+
       class Mock
         def restore_vm
           response = Excon::Response.new
@@ -58,6 +55,7 @@ module Fog
           response.body
         end # restore_vm
       end # Mock
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

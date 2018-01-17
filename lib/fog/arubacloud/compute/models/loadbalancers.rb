@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -15,6 +16,6 @@ module Fog
       class LoadBalancers < Fog::Collection
         model Fog::ArubaCloud::Compute::LoadBalancer
       end # Load Balancers
-    end # ArubaCloud
-  end # Compute
+    end # Compute
+  end # ArubaCloud
 end # Fog

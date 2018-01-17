@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -16,14 +17,9 @@ module Fog
       class Real
         def get_shared_storage
           body = self.body('GetSharedStorages')
-          options = {
-              :http_method => :post,
-              :method => 'GetSharedStorages',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'GetSharedStorages', 'GetSharedStorages Error')
           }
           Fog::Logger.debug("GetSharedStorages time: #{time}")
           if response['Success']
@@ -31,8 +27,8 @@ module Fog
           else
             raise Fog::ArubaCloud::Errors::RequestError.new('Error in request.')
           end
-
         end # get_shared_storage
+
         class Mock
           def get_shared_storage
             raise Fog::Errors::MockNotImplemented.new(
@@ -41,6 +37,7 @@ module Fog
           end # get_shared_storage
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

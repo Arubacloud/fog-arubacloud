@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -27,14 +28,9 @@ module Fog
                   }
               }
           )
-          options = {
-              :http_method => :post,
-              :method => 'SetEnqueueServerSnapshot',
-              :body => Fog::JSON.encode(body)
-          }
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body , 'SetEnqueueServerSnapshot', 'SetEnqueueServerSnapshot Error')
           }
           Fog::Logger.debug("SetEnqueueServerSnapshot time: #{time}")
           if response['Success']
@@ -44,6 +40,7 @@ module Fog
           end
         end #Apply
       end #Real
+
       class Mock
         def delete_snapshot
           response = Excon::Response.new
@@ -55,8 +52,9 @@ module Fog
               'Success' => true
           }
           response.body
-        end
-      end
-    end # ArubaCloud
-  end # Compute
+        end #delete snapshot
+      end # Mock
+
+    end # Compute
+  end # ArubaCloud
 end # Fog

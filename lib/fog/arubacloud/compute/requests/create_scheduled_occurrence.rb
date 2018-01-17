@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -44,15 +45,9 @@ module Fog
                 :ScheduleFrequencyType => data[:frequency]
             }
           end
-          options = {
-              :http_method => :post,
-              :method => 'SetAddServerScheduledOperation',
-              :body => Fog::JSON.encode(body)
-          }
-
           response = nil
           time = Benchmark.realtime {
-            response = request(options)
+            response = request(body, 'SetAddServerScheduledOperation', 'SetAddServerScheduledOperation Error')
           }
           Fog::Logger.debug("SetAddServerScheduledOperation time: #{time}")
           if response['Success']
@@ -61,6 +56,7 @@ module Fog
             raise Fog::ArubaCloud::Errors::RequestError.new('Error during the Scheduled Operation creation.')
           end
         end # create_scheduled_occurence
+
         class Mock
           def create_scheduled_occurence
             raise Fog::Errors::MockNotImplemented.new(
@@ -69,6 +65,7 @@ module Fog
           end # create_scheduled_occurence
         end # Mock
       end # Real
-    end # ArubaCloud
-  end # Compute
+
+    end # Compute
+  end # ArubaCloud
 end # Fog
