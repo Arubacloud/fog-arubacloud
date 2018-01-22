@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'fog-arubacloud'
   spec.version       = Fog::ArubaCloud::VERSION
   spec.authors       = ['Aruba S.p.A.']
-  spec.email         = ['luca.lasagni@staff.aruba.it']
+  spec.email         = ['cloudsdk@staff.aruba.it']
   spec.summary       = %q{Module for the 'fog' gem to support ArubaCloud}
   spec.description   = %q{This library can be used as a module for 'fog' or a standalone provider to use
                        the ArubaCloud IaaS in applications}
