@@ -20,6 +20,13 @@ module Fog
         ARCHIVED = 4
         DELETED = 5
 
+        STATE_DES = {  Fog::ArubaCloud::Compute::Server::CREATING  => "Creating",
+               Fog::ArubaCloud::Compute::Server::STOPPED  => "Stopped",
+               Fog::ArubaCloud::Compute::Server::RUNNING  => "Running",
+               Fog::ArubaCloud::Compute::Server::ARCHIVED  => "Archived",
+               Fog::ArubaCloud::Compute::Server::DELETED  => "Deleted"
+                   }
+
         #collection_name :servers
 
         # This is the instance ID which is unique per Datacenter
@@ -196,22 +203,22 @@ module Fog
         def restore
           requires :id, :memory, :cpu
           state == ARCHIVED and memory != nil and cpu != nil ? service.restore_vm(id) : raise(
-              Fog::ArubaCloud::Errors::VmStatus.new("Cannot restore VM without specifying #{cpu} and #{memory}"
-              ))
+              Fog::ArubaCloud::Errors::VmStatus.new("Cannot restore VM without specifying #{cpu} and #{memory}"))
+        end
+
+        def list_snapshot
+          requires :id
+          id != nil  ? service.list_snapshot(id) : raise(Fog::ArubaCloud::Errors::VmStatus.new('Cannot list snapshot without vm id'))
         end
 
         def create_snapshot
           requires :id
-          id != nil ? service.create_snapshot(id) : raise(Fog::ArubaCloud::Errors::VmStatus.new(
-              'Cannot crate snapshot without vm id'
-          ))
+          id != nil  ? service.create_snapshot(id) : raise(Fog::ArubaCloud::Errors::VmStatus.new('Cannot create snapshot without vm id'))
         end
 
         def apply_snapshot
           requires :id
-          self.action_hook(method=:apply_snapshot, expected_state=STOPPED,
-                           message="Cannot restore vm in current state: #{state}"
-          )
+          self.action_hook(method=:apply_snapshot, expected_state=STOPPED, message="Cannot restore vm in current state: #{state}" )
         end
 
         def delete_snapshot

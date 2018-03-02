@@ -15,22 +15,25 @@ module Fog
   module ArubaCloud
     class Compute
       class Real
-        # Apply a snapshot on a VM
-        def apply_snapshot(data)
-          (service.servers).all.each do |server|
-            id = server.id if (server.name).include? data[:name]
-          end
-          body = {
-              :Snapshot => {
-                  :ServerId => id,
-                  :SnapshotOperationTypes => 'Restore'
-              }
-          }
-          self.request(
-                  body=body,
-                  method_name='SetEnqueueServerSnapshot',
-                  failure_message='Error while applying snapshot.'
+        # Apply (restore) a snapshot on a VM
+        def apply_snapshot(id)
+          body = self.body('SetEnqueueServerSnapshot').merge(
+            {
+              :ServerId => id ,  :SnapshotOperation => Fog::ArubaCloud::Compute::SNAPOPTYPE["Restore"]
+            }
           )
+          response = nil
+          time = Benchmark.realtime {
+            response = request(body , 'SetEnqueueServerSnapshot', 'Error while attempting to restore a snapshot.')
+          }
+          Fog::Logger.debug("SetEnqueueServerSnapshot time: #{time}")
+          if response['Success']
+            response_ext = response.merge( {  "Req" => "restore" , "Id" => id })
+            response_ext
+          else
+            raise Fog::ArubaCloud::Errors::RequestError.new(response)
+          end
+
         end #Apply
       end #Real
 

@@ -19,6 +19,13 @@ module Fog
       PRO_HV_LC = 3
       SMART     = 4
 
+      SNAPOPTYPE = {
+        "Create"  => "1",
+        "Delete"  => "2",
+        "Restore" => "3",
+        "List" => "4"
+      }
+
       recognizes :url
       requires :arubacloud_username, :arubacloud_password
 
@@ -59,6 +66,7 @@ module Fog
       request :get_purchased_ip_addresses
       request :get_hypervisors
       request :reinitialize_vm
+      request :list_snapshot
       request :create_snapshot
       request :apply_snapshot
       request :delete_snapshot
@@ -125,7 +133,6 @@ module Fog
               :body => Fog::JSON.encode(body)
           }
           response = nil
-
           if benchmark
             time = Benchmark.realtime {
               response = _request(options)

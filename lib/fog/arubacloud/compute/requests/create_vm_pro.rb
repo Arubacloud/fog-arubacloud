@@ -52,8 +52,12 @@ module Fog
 
           response = nil
           time = Benchmark.realtime {
-            response = request(body, 'SetEnqueueServerCreation', 'SetEnqueueServerCreation Error')
+            mymux = Fog::ArubaCloud.getUserMutex
+            mymux.synchronize {
+              response = request( body, 'SetEnqueueServerCreation', 'Pro_vm creation error')
+            }
           }
+
           Fog::Logger.debug("SetEnqueueServerCreation time: #{time}")
           if response['Success']
             response

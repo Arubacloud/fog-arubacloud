@@ -15,30 +15,25 @@ module Fog
   module ArubaCloud
     class Compute
       class Real
-        # Apply a snapshot on a VM
-        def delete_snapshot(data)
-          (service.servers).all.each do |server|
-            id = server.id if (server.name).include? data[:name]
-          end
+        # Delete a snapshot on a VM
+        def delete_snapshot(id)
           body = self.body('SetEnqueueServerSnapshot').merge(
-              {
-                  :Snapshot => {
-                      :ServerId => id,
-                      :SnapshotOperationTypes => 'Delete'
-                  }
-              }
+            {
+              :ServerId => id ,  :SnapshotOperation => Fog::ArubaCloud::Compute::SNAPOPTYPE["Delete"]
+            }
           )
           response = nil
           time = Benchmark.realtime {
-            response = request(body , 'SetEnqueueServerSnapshot', 'SetEnqueueServerSnapshot Error')
+            response = request(body , 'SetEnqueueServerSnapshot', 'Error while attempting to delete a snapshot.')
           }
           Fog::Logger.debug("SetEnqueueServerSnapshot time: #{time}")
           if response['Success']
-            response
+            response_ext = response.merge( {  "Req" => "Delete" , "Id" => id })
+            response_ext
           else
             raise Fog::ArubaCloud::Errors::RequestError.new(response)
           end
-        end #Apply
+        end #Delete
       end #Real
 
       class Mock

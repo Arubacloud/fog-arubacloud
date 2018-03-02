@@ -17,21 +17,24 @@ module Fog
 
       class Real
         # Create a new snapshot of a VM
-        def create_snapshot(data)
-          (service.servers).all.each do |server|
-            id = server.id if (server.name).include? data[:name]
-          end
-          body = {
-                  :Snapshot => {
-                      :ServerId => id,
-                      :SnapshotOperationTypes => 'Create'
-                  }
-              }
-          self.request(
-                  body=body,
-                  method_name='SetEnqueueServerSnapshot',
-                  failure_message='Error while attempting to create a snapshot.'
+        def create_snapshot(id)
+          body = self.body('SetEnqueueServerSnapshot').merge(
+            {
+              :ServerId => id ,  :SnapshotOperation => Fog::ArubaCloud::Compute::SNAPOPTYPE["Create"]
+            }
           )
+          response = nil
+          time = Benchmark.realtime {
+            response = request(body , 'SetEnqueueServerSnapshot', 'Error while attempting to create a snapshot.')
+          }
+          Fog::Logger.debug("SetEnqueueServerSnapshot time: #{time}")
+          if response['Success']
+            response_ext = response.merge( {  "Req" => "create" , "Id" => id })
+            response_ext
+          else
+            raise Fog::ArubaCloud::Errors::RequestError.new(response)
+          end
+
         end #Create_snapshot
       end #Real
 

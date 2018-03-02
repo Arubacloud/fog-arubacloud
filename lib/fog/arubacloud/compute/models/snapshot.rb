@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Dangleterre Michaël
 # © Copyright ArubaCloud.
@@ -14,10 +15,11 @@ module Fog
         CREATING = 'Create'
         APPLYING = 'Restore'
         DELETING = 'Delete'
+        LIST = 'List'
         identity :id, :aliases => 'id'
 
-        attribute :ServerId, :aliases => 'serverid'
-        attribute :SnapshotOperation, :aliases => 'Snapshot Operation'
+        attribute :serverId, :aliases => 'serverId'
+        attribute :snapshotOperation, :aliases => 'snapshotOperation'
 
         def initialize(attributes = {})
           @service = attributes[:service]
@@ -25,8 +27,19 @@ module Fog
             'operation impossible'
           end
         end
+
+        def list
+          requires :serverId
+          data = :attributes
+          if :name != nil
+            data[:name] = name
+          else
+            raise Fog::ArubaCloud::Errors::BadParameters.Exception('Missing Parameter')
+          end
+        end # List
+
         def create
-          requires :ServerId
+          requires :serverId
           data = :attributes
           if :name != nil
             data[:name] = name
@@ -34,8 +47,9 @@ module Fog
             raise Fog::ArubaCloud::Errors::BadParameters.Exception('Missing Parameter')
           end
         end # Create
+
         def apply
-          requires :ServerId
+          requires :serverId
           data = :attributes
           if :name != nil
             data[:name] = name
@@ -43,8 +57,9 @@ module Fog
             raise Fog::ArubaCloud::Errors::BadParameters.Exception('Missing Parameter')
           end
         end # Apply
+
         def delete
-          requires :ServerId
+          requires :serverId
           data = :attributes
           if :name != nil
             data[:name] = name

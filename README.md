@@ -23,6 +23,12 @@ Or install it yourself as:
 
     $ gem install fog-arubacloud
 
+
+## Update 
+
+
+In package has been updated the 'snapshot' methods , and has added  'list_snapshot ' feature to see if a snapshot exist;   
+
 ## Usage
 
 TODO: Write usage instructions here

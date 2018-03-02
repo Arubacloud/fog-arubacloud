@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Author:: Alessio Rocchi (<alessio.rocchi@staff.aruba.it>)
 # © Copyright ArubaCloud.
@@ -29,10 +30,10 @@ module Fog
 
         # initialize connection object
         @connection = Fog::Core::Connection.new(@request_url, false, params)
-
         # send request
         begin
           response = @connection.request(:method => http_method)
+          @connection.reset
         rescue Excon::Errors::Timeout
           # raise an error
           raise Fog::ArubaCloud::Errors::RequestTimeOut.new(
